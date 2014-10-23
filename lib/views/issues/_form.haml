@@ -1,6 +1,12 @@
 -# !new_record? => /issues/129312361023
 -# new_record? => /issues
 %form(action="/issues#{ !issue.new_record? ? "/#{issue.id}" : ""}" method="post")
+  -if issue.errors.any?
+    .panel.panel-danger
+      .panel-body
+        %ul
+          -issue.errors.full_messages.each do |error|
+            %li=error
   %p
     %label(for="issue_name") Name
     %input(type="text" id="issue_name" value="#{issue.name}" name="issue[name]" class="form-control")
