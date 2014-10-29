@@ -1,4 +1,6 @@
 require "models/issue"
+require "models/comment"
+require "models/project"
 
 class App < Sinatra::Base
   enable :sessions
@@ -31,6 +33,11 @@ class App < Sinatra::Base
     haml :"issues/new"
   end
 
+  get "/issues/:id" do
+    @issue = Issue.find params[:id]
+    haml :"issues/show"
+  end
+
   post "/issues" do
     @issue = Issue.new params[:issue]
     if @issue.save
@@ -52,5 +59,24 @@ class App < Sinatra::Base
     else
       haml :"issues/edit"
     end
+  end
+
+  post "/issues/:id/comments" do
+    @issue = Issue.find params[:id]
+    if @issue.comments.create params[:comment]
+      redirect "/issues/#{params[:id]}"
+    else
+      render :"issues/show"
+    end
+  end
+
+  get "/projects" do
+    @projects = Project.all
+    haml :"projects/index"
+  end
+
+  get "/projects/:id" do
+    @project = Project.find params[:id]
+    haml :"projects/show"
   end
 end

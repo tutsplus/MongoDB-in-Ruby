@@ -1,0 +1,15 @@
+%h1 Projects
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Amount of issues
+      %th Created at
+  -@projects.each do |project|
+    %tr
+      %td
+        %a(href="/projects/#{project.id}")=project.name
+        %a.label.label-primary(href="/projects/#{project.id}/edit") edit
+      %td=project.issues.count
+      %td=project.id.generation_time.ago_in_words

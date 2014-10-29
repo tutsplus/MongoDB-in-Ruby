@@ -1,0 +1,28 @@
+%h1
+  =@issue.name
+  %small
+    from
+    %a(href="/projects/#{@issue.project.id}")
+      =@issue.project.name
+
+.well
+  =@issue.description
+
+%h2 All comments
+
+%ul.list-unstyled
+  -@issue.comments.each do |comment|
+    %li
+      %blockquote
+        %p=comment.body
+        %footer
+          #{comment.name},
+          %em=comment.id.generation_time.ago_in_words
+
+%form(action="/issues/#{@issue.id}/comments" method="post")
+  %p
+    %input.form-control(name="comment[name]" type="text" placeholder="Your name")
+  %p
+    %textarea.form-control(name="comment[body]" placeholder="Your comment")
+  %p
+    %button.btn.btn-primary Submit comment

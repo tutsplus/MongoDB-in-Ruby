@@ -1,0 +1,21 @@
+%table.table.table-hover
+  %thead
+    %tr
+      %th Title
+      %th Description
+      %th Created at
+      %th Status
+  -issues.each do |issue|
+    %tr
+      %td
+        %a(href="/issues/#{issue.id}")=issue.name
+        %a.label.label-primary(href="/issues/#{issue.id}/edit") edit
+      %td=issue.description
+      %td=issue.id.generation_time.ago_in_words
+      %td=issue.status
+  -unless issues.any?
+    %tfoot
+      %tr
+        %th
+          There are no issues.
+          %a.btn.btn-primary(href="/issues/new") Create one
