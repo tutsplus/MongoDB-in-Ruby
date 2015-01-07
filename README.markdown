@@ -9,4 +9,4 @@ of using this database system in a Ruby environment.
 
 Source files for the Tuts+ course: [MongoDB in Ruby](https://courses.tutsplus.com/courses/)
 
-**Available on Tuts+ January 2014 **
+**Available on Tuts+ January 2014**
